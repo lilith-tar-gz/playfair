@@ -1,19 +1,4 @@
-#Πολυαλφαβητικά Συστήματα Αντικατάστασης 
-#Αλγόριθμος Κώδικα Αντικατάστασης 2-γραμμάτων PLAYFAIR 
-#Διαδικασία :
-#Ζητάει από το χρήστη να συμπληρώσει τον πίνακα με τη λέξη-κλειδί και τα υπόλοιπα γράμματα της αλφαβήτας
-# print("Let's create our array! Think of a keyword. Enter the letters of the word in UPPERCASE without repeating them. Fill the rest of the array with the letters of the alphabet alphabetically skipping J and the letters you've already used ")
-# key_table = [[0 for i in range(5)] for j in range(5)] 
-# for i in range(5):
-#     for j in range(5):
-#         key_table[i][j]=input("Enter letter : ")
-
-
-key_table = [['P', 'L', 'A', 'Y', 'F'], ['I', 'R', 'B', 'C', 'D'], ['E', 'G', 'H', 'K', 'M'], ['N', 'O', 'Q', 'S', 'T'], ['U', 'V', 'W', 'X', 'Z']]
-
-for x in range(4) :
-        print (key_table[x][0],key_table[x][1],key_table[x][2],key_table[x][3],key_table[x][4])
-
+# Κρυπτογράφηση
 def encryption(key_table):
     #----------------------------------------------------------------------------   
     #Ζητάει από τον χρήστη να εισάγει το κείμενο που θέλει να κρυπτογραφίσει 
@@ -41,10 +26,6 @@ def encryption(key_table):
 
     # Τα εισάγει σε μία δισδιάστατη λίστα χωρίζοντάς το κείμενο σε ζευγάρια χαρακτήρων
     new_chain = [chain[y:y+2] for y in range(0,cnumber,2)][:cnumber]
-    # for x in range(cnumber//2) :
-    #         print (new_chain[x][0],new_chain[x][1])
-
-    #Κρυπτογράφηση :
 
     #1) Αναζητά τις θέσεις των ζευγαριών της λίστας στον πίνακα με τη λέξη κλειδί
     for r in range(0,cnumber//2,1):
@@ -56,49 +37,35 @@ def encryption(key_table):
         key2 = new_chain[r][1]
         found1 = False
         found2 = False
-        # print("key1: ",key1)
-        # print("key2: ",key2)
-
-        for i in range(5) : 
-            for j in range(5) :
+        for i in range(8) : 
+            for j in range(8) :
                 if key1 == key_table[i][j] :
                     i1 = i
                     j1 = j
                     found1 = True
-                    # print("key1: ", key1)
-                    # print("key_table[i][j]: ", key_table[i][j])
-                    # print("in first if" , key_table[i1][j1])
                 if key2 == key_table[i][j] :
                     i2 = i
                     j2 = j
                     found2 = True
-                    # print("key2: ", key2)
-                    # print("key_table[i][j]: ", key_table[i][j])
-                    # print("in second if" , key_table[i2][j2])
                 if found1 and found2 :
                     break
-                # print("i: ",i,"j: ",j)
             if found1 and found2 :
                 break
-            
-        # print(" Found the characters in those positions : [" , i1 , ", " , j1 , "] and [", i2 , ", " , j2 , "]" )
-        # print("") #gia new line    
-        
         if i1 == i2 :
-            if j1 == 4 :
+            if j1 == 7 :
                 new_chain[r][0] = key_table[i1][0]
                 new_chain[r][1] = key_table[i2][j2+1]
-            elif j2 == 4 :
+            elif j2 == 7 :
                 new_chain[r][0] = key_table[i1][j1+1]
                 new_chain[r][1] = key_table[i2][0]    
             else :
                 new_chain[r][0] = key_table[i1][j1+1]
                 new_chain[r][1] = key_table[i2][j2+1]
         elif j1 == j2 :
-            if i1 == 4 :
+            if i1 == 7 :
                 new_chain[r][0] = key_table[0][j1]
                 new_chain[r][1] = key_table[i2+1][j2]
-            elif i2 == 4 :
+            elif i2 == 7 :
                 new_chain[r][0] = key_table[i1+1][j1]
                 new_chain[r][1] = key_table[0][j2] 
             else : 
@@ -109,27 +76,11 @@ def encryption(key_table):
             new_chain[r][1] = key_table[i2][j1]
 
     print("This is the final message : ")
-    # print (new_chain)
     for i in range(cnumber//2):
         for j in range(2):
             print(new_chain[i][j], end="")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    print("\n")
+  
 #         _____  
 #       /  ___  \
 #     /  /  _  \  \
